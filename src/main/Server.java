@@ -45,9 +45,9 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Enter IP: ");
-        String s = br.readLine();
+        String ip = br.readLine();
 
-        Naming.rebind("rmi://" + s + "/PI-Server", obj);
+        Naming.rebind("rmi://" + ip + "/PI-Server", obj);
         System.out.println("--- PeerServer bound in registry");
     }
 }
