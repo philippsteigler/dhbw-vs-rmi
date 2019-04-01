@@ -1,5 +1,7 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -41,7 +43,11 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
         Server obj = new Server();
 
-        Naming.rebind("rmi://192.168.2.108/PI-Server", obj);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Enter IP: ");
+        String s = br.readLine();
+
+        Naming.rebind("rmi://" + s + "/PI-Server", obj);
         System.out.println("--- PeerServer bound in registry");
     }
 }
