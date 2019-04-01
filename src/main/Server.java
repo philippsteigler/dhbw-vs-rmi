@@ -41,7 +41,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
         Server obj = new Server();
 
-        Naming.rebind("rmi://localhost/PI-Server", obj);
+        Naming.rebind("rmi://192.168.2.108/PI-Server", obj);
         System.out.println("--- PeerServer bound in registry");
     }
 }
