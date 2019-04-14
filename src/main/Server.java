@@ -41,7 +41,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         System.out.println("--- RMI server started");
 
         try {
-            LocateRegistry.createRegistry(Integer.parseInt(ip));
+            LocateRegistry.createRegistry(Integer.parseInt(port));
             System.out.println("--- java RMI registry created.");
         } catch (RemoteException e) {
             System.out.println("--- java RMI registry already exists.");
