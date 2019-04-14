@@ -32,22 +32,23 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     public static void main(String args[]) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Enter IP: ");
+        String ip = br.readLine();
+        System.out.print("Enter port (default is 1099): ");
+        String port = br.readLine();
+
         System.out.println("--- RMI server started");
 
         try {
-            LocateRegistry.createRegistry(1099);
+            LocateRegistry.createRegistry(Integer.parseInt(ip));
             System.out.println("--- java RMI registry created.");
         } catch (RemoteException e) {
             System.out.println("--- java RMI registry already exists.");
         }
 
         Server obj = new Server();
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Enter IP: ");
-        String ip = br.readLine();
-
-        Naming.rebind("rmi://" + ip + "/PI-Server", obj);
+        Naming.rebind("rmi://" + ip + ":" + port + "/PI-Server", obj);
         System.out.println("--- PeerServer bound in registry");
     }
 }
