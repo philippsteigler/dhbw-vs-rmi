@@ -19,12 +19,12 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         double denominator = 1;
 
         for (int x = 0; x < precision; x++) {
-
             if (x % 2 == 0) {
                 pi = pi + (1 / denominator);
             } else {
                 pi = pi - (1 / denominator);
             }
+
             denominator = denominator + 2;
         }
 
