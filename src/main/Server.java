@@ -1,7 +1,5 @@
 package main;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -14,7 +12,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public double getPI(int precision) {
+    public double calculatePI(int precision) {
         double pi = 0;
         double denominator = 1;
 
@@ -31,24 +29,23 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
         return pi * 4;
     }
 
-    public static void main(String args[]) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Enter IP: ");
-        String ip = br.readLine();
-        System.out.print("Enter port (default is 1099): ");
-        String port = br.readLine();
+    @Override
+    public String getOS() {
+        return System.getProperty("os.name");
+    }
 
+    public static void main(String args[]) throws Exception {
         System.out.println("--- RMI server started");
 
         try {
-            LocateRegistry.createRegistry(Integer.parseInt(port));
+            LocateRegistry.createRegistry(1099);
             System.out.println("--- java RMI registry created.");
         } catch (RemoteException e) {
             System.out.println("--- java RMI registry already exists.");
         }
 
         Server obj = new Server();
-        Naming.rebind("rmi://" + ip + ":" + port + "/PI-Server", obj);
+        Naming.rebind("My-Server", obj);
         System.out.println("--- PeerServer bound in registry");
     }
 }

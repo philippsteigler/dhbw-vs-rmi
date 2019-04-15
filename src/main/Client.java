@@ -10,13 +10,13 @@ public class Client {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         System.out.print("Enter IP: ");
         String ip = br.readLine();
-        System.out.print("Enter port (default is 1099): ");
-        String port = br.readLine();
 
-        ServerInterface obj = (ServerInterface) Naming.lookup("rmi://" + ip + ":" + port + "/PI-Server");
+        ServerInterface obj = (ServerInterface) Naming.lookup("rmi://" + ip + ":1099" + "/My-Server");
 
-        for (int i = 0; i < 100; i++) {
-            System.out.println(obj.getPI(10000000));
-        }
+        // Test calculatePI
+        System.out.println(obj.calculatePI(10000000));
+
+        // Test getServerOS
+        System.out.println(obj.getOS());
     }
 }
