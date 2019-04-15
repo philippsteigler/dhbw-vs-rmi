@@ -12,24 +12,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public double calculatePI(int precision) {
-        double pi = 0;
-        double denominator = 1;
-
-        for (int x = 0; x < precision; x++) {
-            if (x % 2 == 0) {
-                pi = pi + (1 / denominator);
-            } else {
-                pi = pi - (1 / denominator);
-            }
-
-            denominator = denominator + 2;
-        }
-
-        return pi * 4;
-    }
-
-    @Override
     public String getOS() {
         return System.getProperty("os.name");
     }

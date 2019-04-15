@@ -14,9 +14,6 @@ public class Client {
 
             ServerInterface obj = (ServerInterface) Naming.lookup("rmi://" + ip + ":1099" + "/My-Server");
 
-            // Test calculatePI
-            System.out.println(obj.calculatePI(10000000));
-
             // Test getOS
             System.out.println(obj.getOS());
         } catch (Exception e) {
