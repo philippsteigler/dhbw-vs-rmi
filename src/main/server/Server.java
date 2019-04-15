@@ -1,4 +1,4 @@
-package main;
+package main.server;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -21,9 +21,9 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
         try {
             LocateRegistry.createRegistry(1099);
-            System.out.println("--- java RMI registry created.");
+            System.out.println("--- Java RMI registry created.");
         } catch (RemoteException e) {
-            System.out.println("--- java RMI registry already exists.");
+            System.out.println("--- Java RMI registry already exists.");
         }
 
         Server obj = new Server();

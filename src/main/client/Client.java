@@ -1,4 +1,6 @@
-package main;
+package main.client;
+
+import main.server.ServerInterface;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -17,7 +19,7 @@ public class Client {
             // Test getOS
             System.out.println(obj.getOS());
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("--- Error: " + e.getMessage());
         }
     }
 }
