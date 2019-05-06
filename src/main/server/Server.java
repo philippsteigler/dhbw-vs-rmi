@@ -1,7 +1,5 @@
 package main.server;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -19,26 +17,23 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     public static void main(String args[]) {
-        try {
-            // Read IP of server network interface
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            System.out.print("Enter IP: ");
-            String ip = br.readLine();
+        if (args[0] != null) {
+            try {
+                // Set hostname to server IP in order to overwrite localhost reference
+                System.setProperty("java.rmi.server.hostname", args[0]);
+                System.out.println("--- RMI server started");
 
-            // Set hostname to server IP in order to overwrite localhost reference
-            System.setProperty("java.rmi.server.hostname", ip);
-            System.out.println("--- RMI server started");
+                // Create Java RMI registry on port 1099
+                Registry registry = LocateRegistry.createRegistry(1099);
+                System.out.println("--- Java RMI registry created.");
 
-            // Create Java RMI registry on port 1099
-            Registry registry = LocateRegistry.createRegistry(1099);
-            System.out.println("--- Java RMI registry created.");
-
-            // Initialize server object and bind it to registry
-            Server obj = new Server();
-            registry.rebind("My-Server", obj);
-            System.out.println("--- PeerServer bound in registry");
-        } catch (Exception e) {
-            System.out.println("--- Java RMI registry already exists.");
+                // Initialize server object and bind it to registry
+                Server obj = new Server();
+                registry.rebind("My-Server", obj);
+                System.out.println("--- PeerServer bound in registry");
+            } catch (Exception e) {
+                System.out.println("--- Java RMI registry already exists.");
+            }
         }
     }
 }
