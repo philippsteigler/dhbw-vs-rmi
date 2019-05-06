@@ -18,7 +18,7 @@ public class Client {
             // Retrieve registry from remote server
             Registry registry = LocateRegistry.getRegistry(ip, 1099);
 
-            // get reference to remote object buy looking through the registry
+            // Get reference to remote object buy looking through the registry
             ServerInterface obj = (ServerInterface) registry.lookup( "My-Server");
 
             // Demo: call remote method from server

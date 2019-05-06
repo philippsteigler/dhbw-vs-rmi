@@ -19,8 +19,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     public static void main(String args[]) {
-        System.out.println("--- RMI server started");
-
         try {
             // Read IP of server network interface
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -29,6 +27,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
             // Set hostname to server IP in order to overwrite localhost reference
             System.setProperty("java.rmi.server.hostname", ip);
+            System.out.println("--- RMI server started");
 
             // Create Java RMI registry on port 1099
             Registry registry = LocateRegistry.createRegistry(1099);
