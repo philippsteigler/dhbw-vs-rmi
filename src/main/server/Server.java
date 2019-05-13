@@ -14,14 +14,16 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
     @Override
     public String getSystemInfo() {
-        return "OS: " + System.getProperty("os.name")
+        return "-- OS --"
+                + "\nOS: " + System.getProperty("os.name")
                 + "\nVersion: " + System.getProperty("os.version")
                 + "\nArchitecture: " + System.getProperty("os.arch")
+                + "\n-- RUNTIME --"
                 + "\nRuntime Environment: " + System.getProperty("java.runtime.name")
                 + "\nRuntime Version: " + System.getProperty("java.runtime.version")
                 + "\nJava Version: " + System.getProperty("java.version")
                 + "\nJava Home:" + System.getProperty("java.home")
-                + "\n----------------------"
+                + "\n-- USER --"
                 + "\nUser: " + System.getProperty("user.name")
                 + "\nHome Dir: " + System.getProperty("user.home")
                 + "\nCurrent Dir: " + System.getProperty("user.dir");
@@ -34,19 +36,19 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public int length(String s) {
+    public int strLength(String s) {
         try {
             MersenneTwister mt = new MersenneTwister();
-            int n = mt.nextInt(0, s.length()*2);
+            int np = mt.nextInt(0, s.length()*3);
 
-            if (n == s.length()) {
-                return n;
+            if (np == s.length()) {
+                return np;
             } else {
-                TimeUnit.MILLISECONDS.sleep(1);
-                return length(s);
+                TimeUnit.NANOSECONDS.sleep(1);
+                return strLength(s);
             }
         } catch (Exception e) {
-            System.out.println("--- Error: " + e.getMessage());
+            System.out.println("[ERROR]: " + e.getMessage());
             return 0;
         }
     }
@@ -59,14 +61,13 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
             // Create Java RMI registry on port 1099
             Registry registry = LocateRegistry.createRegistry(1099);
-            System.out.println("--- Java RMI registry created.");
+            System.out.println("--- Java RMI registry created");
 
             // Initialize server object and bind it to registry
-            Server obj = new Server();
-            registry.rebind("My-Server", obj);
+            registry.rebind("My-Server", new Server());
             System.out.println("--- PeerServer bound in registry");
         } catch (Exception e) {
-            System.out.println("--- Java RMI registry already exists.");
+            System.out.println("[ERROR]: " + e.getMessage());
         }
     }
 }
