@@ -13,7 +13,17 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
 
     @Override
     public String getOS() {
-        return System.getProperty("os.name");
+        return "OS: " + System.getProperty("os.name")
+                + "\nVersion: " + System.getProperty("os.version")
+                + "\nArchitecture: " + System.getProperty("os.arch")
+                + "\nRuntime Environment: " + System.getProperty("java.runtime.name")
+                + "\nRuntime Version: " + System.getProperty("java.runtime.version")
+                + "\nJava Version: " + System.getProperty("java.version")
+                + "\nJava Home:" + System.getProperty("java.home")
+                + "\n----------------------"
+                + "\nUser: " + System.getProperty("user.name")
+                + "\nHome Dir: " + System.getProperty("user.home")
+                + "\nCurrent Dir: " + System.getProperty("user.dir");
     }
 
     public static void main(String args[]) {
