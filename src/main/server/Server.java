@@ -12,7 +12,7 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public String getOS() {
+    public String getSystemInfo() {
         return "OS: " + System.getProperty("os.name")
                 + "\nVersion: " + System.getProperty("os.version")
                 + "\nArchitecture: " + System.getProperty("os.arch")

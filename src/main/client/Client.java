@@ -22,7 +22,7 @@ public class Client {
             ServerInterface obj = (ServerInterface) registry.lookup( "My-Server");
 
             // Demo: call remote method from server
-            System.out.println(obj.getOS());
+            System.out.println(obj.getSystemInfo());
         } catch (Exception e) {
             System.out.println("--- Error: " + e.getMessage());
         }
