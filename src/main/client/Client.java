@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.concurrent.TimeUnit;
 
 public class Client {
 
@@ -23,6 +24,11 @@ public class Client {
 
             // Demo: call remote method from server
             System.out.println(obj.getSystemInfo());
+
+            for (int i = 0; i < 5000; i++) {
+                System.out.println(obj.generateRandomNumber(0, 1000000));
+                TimeUnit.MILLISECONDS.sleep(5);
+            }
         } catch (Exception e) {
             System.out.println("--- Error: " + e.getMessage());
         }

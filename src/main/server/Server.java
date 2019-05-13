@@ -12,17 +12,6 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
     }
 
     @Override
-    public String getOS() {
-        StringBuilder out = new StringBuilder();
-
-         for (int i = 0; i < 5000; i++) {
-            out.append(System.getProperty("os.name")).append("\n");
-        }
-
-        return out.toString();
-    }
-
-    @Override
     public String getSystemInfo() {
         return "OS: " + System.getProperty("os.name")
                 + "\nVersion: " + System.getProperty("os.version")
@@ -35,6 +24,12 @@ public class Server extends UnicastRemoteObject implements ServerInterface {
                 + "\nUser: " + System.getProperty("user.name")
                 + "\nHome Dir: " + System.getProperty("user.home")
                 + "\nCurrent Dir: " + System.getProperty("user.dir");
+    }
+
+    @Override
+    public int generateRandomNumber(int min, int max) {
+        MersenneTwister mt = new MersenneTwister();
+        return mt.nextInt(min, max);
     }
 
     public static void main(String args[]) {
